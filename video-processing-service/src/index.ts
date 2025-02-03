@@ -1,5 +1,4 @@
 import express from "express";
-import ffmpeg from "fluent-ffmpeg";
 import { convertVideo, deleteProcessedVideo, deleteRawVideo, downloadRawVideo, setupDirectories, uploadProcessedVideo } from "./storage";
 
 setupDirectories();
@@ -30,7 +29,7 @@ app.post(`/process-video`, async (req, res) => {
 
     try {
         await convertVideo(inputFileName, outputFileName);
-        console.log("Video converted");
+        console.log("Video converted.");
 
     } catch (err) {
         console.error(err);
