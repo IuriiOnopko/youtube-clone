@@ -1,10 +1,12 @@
 // 1. GCS file interactions 
 // 2. Local file interactions
 
-import { Storage } from '@google-cloud/storage';
+
 import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import { dir, error } from 'console';
+import { Storage } from '@google-cloud/storage';
+
 
 
 const storage = new Storage();
@@ -40,6 +42,10 @@ export function convertVideo(rawVideoName: string, processedVideoName: string) {
     });
 }
 
+/**
+ * 
+ * @param fileName The name of the file (no path). 
+ */
 export async function downloadRawVideo(fileName: string) {
     
     await storage.bucket(rawVideoBucketName)
@@ -52,6 +58,10 @@ export async function downloadRawVideo(fileName: string) {
 
 }
 
+/**
+ * 
+ * @param fileName The name of the file (no path).
+ */
 export async function uploadProcessedVideo(fileName: string) {
     const bucket = storage.bucket(processedVideoBucketName);
 
@@ -62,6 +72,11 @@ export async function uploadProcessedVideo(fileName: string) {
     await bucket.file(fileName).makePublic();
 }
 
+/**
+ * 
+ * @param filePath Full file path.
+ * @returns Promise...
+ */
 export async function deleteFile(filePath: string){
     return new Promise<void> ((resolve, reject) => {
         if (fs.existsSync(filePath)){

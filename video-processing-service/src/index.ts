@@ -51,7 +51,7 @@ app.post(`/process-video`, async (req, res) => {
         deleteProcessedVideo(outputFileName)]
     );
 
-    return res.status(200).send("Video uploaded successfuly.");
+    return res.status(200).send("Processing finished successfully.");
 
 });
 
